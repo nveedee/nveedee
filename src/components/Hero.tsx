@@ -1,28 +1,86 @@
+'use client'
+
+import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { SITE } from '@/lib/site'
 
+const DESKTOP_QUERY = '(min-width: 768px)'
+const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
+
 /**
- * Hero: Auf Desktop ein stummes Loop-Video (mit Poster), auf Mobile das Poster-Bild.
- * Lege dein Video als /public/media/hero.mp4 ab — fehlt es, zeigt der Player einfach das Poster.
+ * Hero: Poster ist sofort sichtbar (next/image, priority). Auf Desktop lädt
+ * parallel /media/hero-web.mp4 unsichtbar (opacity 0) im Hintergrund; sobald
+ * es abspielbereit ist, blendet es über das Poster (beide Layer überlappen
+ * während der Transition, nie ein leerer Zwischenzustand). Mobile und
+ * prefers-reduced-motion bekommen nur das Poster — das Video wird dort gar
+ * nicht erst geladen.
  */
 export function Hero() {
+    const videoRef = useRef<HTMLVideoElement>(null)
+    const [showVideo, setShowVideo] = useState(false)
+    const [videoReady, setVideoReady] = useState(false)
+
+    useEffect(() => {
+        const desktop = window.matchMedia(DESKTOP_QUERY)
+        const reducedMotion = window.matchMedia(REDUCED_MOTION_QUERY)
+
+        const update = () => setShowVideo(desktop.matches && !reducedMotion.matches)
+        update()
+
+        desktop.addEventListener('change', update)
+        reducedMotion.addEventListener('change', update)
+        return () => {
+            desktop.removeEventListener('change', update)
+            reducedMotion.removeEventListener('change', update)
+        }
+    }, [])
+
+    useEffect(() => {
+        const video = videoRef.current
+        if (!showVideo || !video) return
+
+        // Falls das Video (z. B. aus dem Cache) schon abspielbereit ist,
+        // bevor der Listener sitzt, sofort überblenden statt zu warten.
+        if (video.readyState >= 3) {
+            setVideoReady(true)
+            return
+        }
+
+        const onCanPlay = () => setVideoReady(true)
+        video.addEventListener('canplay', onCanPlay)
+        return () => video.removeEventListener('canplay', onCanPlay)
+    }, [showVideo])
+
     return (
         <section className="relative h-[100svh] min-h-[560px] w-full overflow-hidden bg-paper2">
-            {/* Video auf allen Geräten — Desktop & Mobile/Hochformat */}
-            <video
-                className="absolute inset-0 h-full w-full object-cover"
-                autoPlay
-                muted
-                loop
-                playsInline
-                poster="/media/hero-poster.jpg"
-            >
-                <source src="/media/hero.mp4" type="video/mp4" />
-            </video>
+            {/* Poster-Layer: sofort sichtbar, blendet aus sobald das Video bereit ist */}
+            <Image
+                src="/media/hero-poster.jpg"
+                alt=""
+                fill
+                priority
+                sizes="100vw"
+                className="object-cover transition-opacity duration-700 ease-out"
+                style={{ opacity: videoReady ? 0 : 1 }}
+            />
 
+            {showVideo && (
+                <video
+                    ref={videoRef}
+                    className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out"
+                    style={{ opacity: videoReady ? 1 : 0 }}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                >
+                    <source src="/media/hero-web.mp4" type="video/mp4" />
+                </video>
+            )}
 
-            {/* Gleichmäßiges schwarzes Overlay über das gesamte Hero */}
+            {/* Gleichmäßiges schwarzes Overlay über das gesamte Hero — liegt über beiden Layern */}
             <div className="pointer-events-none absolute inset-0 bg-black/20" />
 
             {/* Dezenter Scrim unten für zusätzliche Lesbarkeit */}
