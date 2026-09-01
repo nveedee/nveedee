@@ -107,8 +107,11 @@
     "dateLocationPlaceholder": "Date & Location",
     "messagePlaceholder": "What's it about? *",
     "errorRequired": "Please fill in name, email and message.",
+    "errorInvalidEmail": "Please enter a valid email address.",
+    "errorSend": "Sending failed. Please try again or email us directly.",
     "send": "Send",
-    "sentMessage": "Thanks! Your message is ready — once sending is wired up, it'll go out."
+    "sending": "Sending …",
+    "sentMessage": "Thanks! Your request has been sent successfully."
   },
   "project": {
     "client": "Client",

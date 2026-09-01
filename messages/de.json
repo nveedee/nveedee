@@ -107,8 +107,11 @@
     "dateLocationPlaceholder": "Datum & Ort",
     "messagePlaceholder": "Worum geht es? *",
     "errorRequired": "Bitte Name, E-Mail und Nachricht ausfüllen.",
+    "errorInvalidEmail": "Bitte eine gültige E-Mail-Adresse angeben.",
+    "errorSend": "Senden fehlgeschlagen. Bitte versuch es nochmal oder schreib uns direkt eine E-Mail.",
     "send": "Senden",
-    "sentMessage": "Danke! Deine Nachricht ist bereit — sobald du den Versand angebunden hast, geht sie raus."
+    "sending": "Wird gesendet …",
+    "sentMessage": "Danke! Deine Anfrage wurde erfolgreich gesendet."
   },
   "project": {
     "client": "Client",
