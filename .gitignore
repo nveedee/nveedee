@@ -9,4 +9,5 @@ npm-debug.log*
 .idea
 .vscode
 next-env.d.ts
+*.tsbuildinfo
 public/media/iCloud*
