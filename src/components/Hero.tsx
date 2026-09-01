@@ -5,16 +5,15 @@ import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 
-const DESKTOP_QUERY = '(min-width: 768px)'
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
 
 /**
- * Hero: Poster ist sofort sichtbar (next/image, priority). Auf Desktop lädt
- * parallel /media/hero-web.mp4 unsichtbar (opacity 0) im Hintergrund; sobald
- * es abspielbereit ist, blendet es über das Poster (beide Layer überlappen
- * während der Transition, nie ein leerer Zwischenzustand). Mobile und
- * prefers-reduced-motion bekommen nur das Poster — das Video wird dort gar
- * nicht erst geladen.
+ * Hero: Poster ist sofort sichtbar (next/image, priority). Parallel lädt
+ * /media/hero-web.mp4 unsichtbar (opacity 0) im Hintergrund — auf allen
+ * Geräten, auch Mobile; sobald es abspielbereit ist, blendet es über das
+ * Poster (beide Layer überlappen während der Transition, nie ein leerer
+ * Zwischenzustand). Nur bei prefers-reduced-motion bleibt es beim Poster —
+ * das Video wird dann gar nicht erst geladen.
  */
 export function Hero() {
     const t = useTranslations('hero')
@@ -23,16 +22,13 @@ export function Hero() {
     const [videoReady, setVideoReady] = useState(false)
 
     useEffect(() => {
-        const desktop = window.matchMedia(DESKTOP_QUERY)
         const reducedMotion = window.matchMedia(REDUCED_MOTION_QUERY)
 
-        const update = () => setShowVideo(desktop.matches && !reducedMotion.matches)
+        const update = () => setShowVideo(!reducedMotion.matches)
         update()
 
-        desktop.addEventListener('change', update)
         reducedMotion.addEventListener('change', update)
         return () => {
-            desktop.removeEventListener('change', update)
             reducedMotion.removeEventListener('change', update)
         }
     }, [])

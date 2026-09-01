@@ -30,7 +30,7 @@ npm run lint       # ESLint
 2. **Projekte** in `src/data/projects.ts` pflegen — Felder pro Projekt:
    `slug, title, mediaType (photo|video|both), category, cover, previewClip?, date, location, client?, description, gallery[], videos?[], credits?, featured`.
    Pfade beginnen mit `/media/...` (der Ordner `public/` kommt NICHT in den Pfad).
-3. **Hero-Video:** Datei als `public/media/hero.mp4` ablegen (Desktop zeigt Video, Mobile das Poster `hero-poster.jpg`). Empfehlung: ≤ 4 MB Desktop / ≤ 2 MB Mobile, 1080p, H.264 — kein 4K im Hero.
+3. **Hero-Video:** Original als `public/media/hero.mp4` ablegen, eine web-optimierte Fassung als `public/media/hero-web.mp4` (die tatsächlich ausgelieferte Datei — 1080p/30fps, ~7 MB). Poster `hero-poster.jpg` ist auf allen Geräten sofort sichtbar und blendet über, sobald das Video abspielbereit ist (nur bei `prefers-reduced-motion` bleibt es beim Poster).
 4. **Hover-Vorschau bei Video-Kacheln:** pro Projekt `previewClip: '/media/xyz.mp4'` setzen (kurzer, stummer Clip).
 5. **Name, Kontakt, Domain, Instagram:** in `src/lib/site.ts`.
 6. **Impressum & Datenschutz:** `app/impressum/page.tsx` und `app/datenschutz/page.tsx` mit echten Angaben füllen (TODO-Marker beachten).
