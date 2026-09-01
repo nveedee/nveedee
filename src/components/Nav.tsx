@@ -20,8 +20,8 @@ export function Nav() {
   ]
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 mix-blend-difference text-white">
-      <nav className="mx-auto flex max-w-wide items-center justify-between px-5 py-3 sm:px-8">
+    <header className="fixed inset-x-0 top-0 z-50">
+      <nav className="mix-blend-difference text-white mx-auto flex max-w-wide items-center justify-between px-5 py-3 sm:px-8">
         <Link href="/" onClick={close} className="font-display text-xl font-semibold tracking-tight">
           {SITE.name}
         </Link>
@@ -59,7 +59,7 @@ export function Nav() {
       </nav>
 
       {open && (
-        <div className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-ink mix-blend-normal md:hidden">
+        <div className="fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-ink text-paper md:hidden">
           {LINKS.map((l) => (
             <Link
               key={l.href}
@@ -70,6 +70,7 @@ export function Nav() {
               {l.label}
             </Link>
           ))}
+          <LocaleSwitcher />
         </div>
       )}
     </header>
