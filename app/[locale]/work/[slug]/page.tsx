@@ -1,16 +1,24 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import Link from 'next/link'
 import { notFound } from 'next/navigation'
+import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { Link } from '@/i18n/navigation'
+import { routing } from '@/i18n/routing'
 import { CATEGORY_LABEL } from '@/data/projects'
 import { getAllProjects, getNextProject, getProject } from '@/lib/projects'
 import { SITE } from '@/lib/site'
 
 export function generateStaticParams() {
-  return getAllProjects().map((p) => ({ slug: p.slug }))
+  return routing.locales.flatMap((locale) =>
+    getAllProjects().map((p) => ({ locale, slug: p.slug }))
+  )
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+export function generateMetadata({
+  params,
+}: {
+  params: { slug: string }
+}): Metadata {
   const p = getProject(params.slug)
   if (!p) return {}
   return {
@@ -20,16 +28,22 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   }
 }
 
-export default function ProjectPage({ params }: { params: { slug: string } }) {
+export default async function ProjectPage({
+  params,
+}: {
+  params: { locale: string; slug: string }
+}) {
+  setRequestLocale(params.locale)
+  const t = await getTranslations('project')
   const project = getProject(params.slug)
   if (!project) notFound()
   const next = getNextProject(project.slug)
 
   const meta = [
-    project.client && ['Client', project.client],
-    ['Location', project.location],
-    ['Date', project.date],
-    ['Sport / Event', CATEGORY_LABEL[project.category]],
+    project.client && [t('client'), project.client],
+    [t('location'), project.location],
+    [t('date'), project.date],
+    [t('sportEvent'), CATEGORY_LABEL[project.category]],
   ].filter(Boolean) as string[][]
 
   const jsonLd = {
@@ -85,10 +99,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           {(() => {
             // Videos & Fotos vermischen
             const items: Array<{ type: 'photo' | 'video'; src: string; index: number }> = []
-            
+
             // Alle Fotos hinzufügen
             project.gallery.forEach((src, i) => items.push({ type: 'photo', src, index: i }))
-            
+
             // Videos gleichmäßig verteilen
             if (project.videos && project.videos.length > 0) {
               const step = Math.ceil((project.gallery.length + project.videos.length) / project.videos.length)
@@ -96,10 +110,10 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
                 items.splice(i * step + i, 0, { type: 'video', src, index: project.gallery.length + i })
               })
             }
-            
+
             return items.map((item, idx) => {
               const full = idx % 4 === 0 || idx % 4 === 1
-              
+
               return (
                 <div
                   key={item.src + idx}
@@ -147,7 +161,7 @@ export default function ProjectPage({ params }: { params: { slug: string } }) {
           href={`/work/${next.slug}`}
           className="group flex items-center justify-between border-t border-line py-10"
         >
-          <span className="text-[11.5px] uppercase tracking-[0.2em] text-muted">Nächstes Projekt</span>
+          <span className="text-[11.5px] uppercase tracking-[0.2em] text-muted">{t('nextProject')}</span>
           <span className="font-display text-2xl font-semibold tracking-tight group-hover:text-accent sm:text-4xl">
             {next.title} →
           </span>

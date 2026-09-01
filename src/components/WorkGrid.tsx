@@ -1,10 +1,13 @@
+import { useTranslations } from 'next-intl'
 import type { Project } from '@/data/projects'
 import { ProjectTile } from './ProjectTile'
 
 export function WorkGrid({ projects }: { projects: Project[] }) {
+  const t = useTranslations('workGrid')
+
   if (projects.length === 0) {
     return (
-      <p className="py-24 text-center text-muted">Keine Projekte in dieser Auswahl.</p>
+      <p className="py-24 text-center text-muted">{t('empty')}</p>
     )
   }
   return (

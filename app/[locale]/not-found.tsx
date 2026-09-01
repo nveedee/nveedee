@@ -1,14 +1,16 @@
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 
 export default function NotFound() {
+  const t = useTranslations('notFound')
   return (
     <section className="mx-auto flex min-h-[70svh] max-w-wide flex-col items-start justify-center px-5 sm:px-8">
-      <p className="text-[11.5px] font-medium uppercase tracking-[0.2em] text-muted">404</p>
+      <p className="text-[11.5px] font-medium uppercase tracking-[0.2em] text-muted">{t('code')}</p>
       <h1 className="mt-3 font-display text-5xl font-semibold tracking-tight sm:text-7xl">
-        Seite nicht gefunden.
+        {t('title')}
       </h1>
       <Link href="/" className="mt-8 border-b-2 border-accent pb-1 font-display text-lg font-medium hover:text-accent">
-        Zurück zur Startseite
+        {t('backHome')}
       </Link>
     </section>
   )

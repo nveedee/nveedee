@@ -1,7 +1,9 @@
-import Link from 'next/link'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import { SITE } from '@/lib/site'
 
 export function Footer() {
+  const t = useTranslations('footer')
   const year = new Date().getFullYear()
   return (
     <footer className="mt-32 border-t border-line">
@@ -21,13 +23,13 @@ export function Footer() {
             {SITE.email}
           </a>
           <Link href="/impressum" className="hover:text-ink">
-            Impressum
+            {t('impressum')}
           </Link>
           <Link href="/datenschutz" className="hover:text-ink">
-            Datenschutz
+            {t('datenschutz')}
           </Link>
         </div>
-        <small className="text-[12px] text-faint">© {year} — {SITE.role}</small>
+        <small className="text-[12px] text-faint">{t('rights', { year, role: SITE.role })}</small>
       </div>
     </footer>
   )

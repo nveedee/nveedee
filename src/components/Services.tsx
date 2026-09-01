@@ -1,18 +1,5 @@
+import { useTranslations } from 'next-intl'
 import { Reveal } from './Reveal'
-
-const PHOTO = [
-  ['Sports', 'Action, Wettkampf und Athlet:innen — nah dran am Geschehen.'],
-  ['Events', 'Stimmung und Momente eines ganzen Anlasses in Bildern.'],
-  ['Athletes / Portraits', 'Charakter in klarem Licht, drinnen wie draussen.'],
-  ['Automotive & Commercial', 'Produkte, Autos und Marken mit Tempo und Präzision.'],
-]
-
-const VIDEO = [
-  ['Sports & Highlight Videos', 'Dynamische Clips, die den Moment noch einmal erlebbar machen.'],
-  ['Event Films', 'Der Anlass als kurzer, stimmiger Film.'],
-  ['Social / Short-form', 'Vertikale Clips für Instagram, TikTok und YouTube.'],
-  ['Brand / Promo', 'Kurze Imagefilme für Vereine, Marken und Unternehmen.'],
-]
 
 function Block({ title, items }: { title: string; items: string[][] }) {
   return (
@@ -31,16 +18,31 @@ function Block({ title, items }: { title: string; items: string[][] }) {
 }
 
 export function Services() {
+  const t = useTranslations('services')
+
+  const photo: string[][] = [
+    t.raw('photo.sports'),
+    t.raw('photo.events'),
+    t.raw('photo.portraits'),
+    t.raw('photo.automotive'),
+  ]
+  const video: string[][] = [
+    t.raw('video.highlights'),
+    t.raw('video.events'),
+    t.raw('video.social'),
+    t.raw('video.brand'),
+  ]
+
   return (
     <section className="mx-auto max-w-wide px-5 py-24 sm:px-8 md:py-32">
       <Reveal className="mb-12">
         <h2 className="font-display text-4xl font-semibold leading-[0.95] tracking-tight sm:text-6xl">
-          Services
+          {t('heading')}
         </h2>
       </Reveal>
       <Reveal className="grid gap-12 md:grid-cols-2 md:gap-20">
-        <Block title="Photography" items={PHOTO} />
-        <Block title="Video" items={VIDEO} />
+        <Block title={t('photographyLabel')} items={photo} />
+        <Block title={t('videoLabel')} items={video} />
       </Reveal>
     </section>
   )

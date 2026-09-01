@@ -1,20 +1,23 @@
 'use client'
 
-import Link from 'next/link'
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import { SITE } from '@/lib/site'
-
-const LINKS = [
-  { href: '/work', label: 'Work' },
-  { href: '/sport', label: 'Sport' },
-  { href: '/about', label: 'About' },
-  { href: '/services', label: 'Services' },
-  { href: '/contact', label: 'Contact' },
-]
+import { LocaleSwitcher } from './LocaleSwitcher'
 
 export function Nav() {
+  const t = useTranslations('nav')
   const [open, setOpen] = useState(false)
   const close = () => setOpen(false)
+
+  const LINKS = [
+    { href: '/work', label: t('work') },
+    { href: '/sport', label: t('sport') },
+    { href: '/about', label: t('about') },
+    { href: '/services', label: t('services') },
+    { href: '/contact', label: t('contact') },
+  ]
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 mix-blend-difference text-white">
@@ -23,30 +26,36 @@ export function Nav() {
           {SITE.name}
         </Link>
 
-        <ul className="hidden items-center gap-8 md:flex">
-          {LINKS.map((l) => (
-            <li key={l.href}>
-              <Link
-                href={l.href}
-                className="group relative py-1 text-[15.5px] font-medium"
-              >
-                {l.label}
-                <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-current transition-transform duration-300 group-hover:scale-x-100" />
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <div className="hidden items-center gap-8 md:flex">
+          <ul className="flex items-center gap-8">
+            {LINKS.map((l) => (
+              <li key={l.href}>
+                <Link
+                  href={l.href}
+                  className="group relative py-1 text-[15.5px] font-medium"
+                >
+                  {l.label}
+                  <span className="absolute inset-x-0 -bottom-0.5 h-px origin-left scale-x-0 bg-current transition-transform duration-300 group-hover:scale-x-100" />
+                </Link>
+              </li>
+            ))}
+          </ul>
+          <LocaleSwitcher />
+        </div>
 
-        <button
-          type="button"
-          aria-label="Menü"
-          aria-expanded={open}
-          onClick={() => setOpen((v) => !v)}
-          className="flex flex-col gap-[5px] p-1.5 md:hidden"
-        >
-          <span className="h-px w-6 bg-white" />
-          <span className="h-px w-6 bg-white" />
-        </button>
+        <div className="flex items-center gap-4 md:hidden">
+          <LocaleSwitcher />
+          <button
+            type="button"
+            aria-label={t('menu')}
+            aria-expanded={open}
+            onClick={() => setOpen((v) => !v)}
+            className="flex flex-col gap-[5px] p-1.5"
+          >
+            <span className="h-px w-6 bg-white" />
+            <span className="h-px w-6 bg-white" />
+          </button>
+        </div>
       </nav>
 
       {open && (

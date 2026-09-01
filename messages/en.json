@@ -1,0 +1,130 @@
+{
+  "nav": {
+    "work": "Work",
+    "sport": "Sport",
+    "about": "About",
+    "services": "Services",
+    "contact": "Contact",
+    "menu": "Menu"
+  },
+  "footer": {
+    "impressum": "Legal Notice",
+    "datenschutz": "Privacy Policy",
+    "rights": "© {year} — {role}"
+  },
+  "hero": {
+    "role": "Photographer & Videographer",
+    "tagline": "Photo & video focused on sport and motion.",
+    "cta": "Work"
+  },
+  "home": {
+    "selectedWorkLabel": "Selected Work",
+    "workHeading": "Work",
+    "viewAll": "View all →",
+    "sportLabel": "Focus",
+    "sportHeading": "Sport",
+    "sportBody": "Sport is my focus: the one moment everyone else misses — sharp, close, in the right light.",
+    "moreSport": "More Sport →",
+    "aboutLabel": "About me",
+    "aboutHeading": "I shoot and film where there's movement — sport, events and people with energy.",
+    "aboutMore": "More about me →",
+    "contactLabel": "Contact",
+    "contactHeading": "Have a project in mind?",
+    "contactCta": "Let's talk"
+  },
+  "featuredProject": {
+    "photographySuffix": "SPORTS PHOTOGRAPHY",
+    "viewProject": "View Project →"
+  },
+  "workGrid": {
+    "empty": "No projects in this selection.",
+    "video": "Video"
+  },
+  "workExplorer": {
+    "all": "All",
+    "allMedia": "All Media",
+    "photo": "Photo",
+    "video": "Video"
+  },
+  "workPage": {
+    "eyebrow": "Portfolio",
+    "title": "Work"
+  },
+  "sportPage": {
+    "eyebrow": "Focus",
+    "title": "Sport",
+    "intro": "My focus is on sport — action, competition and the quiet moments in between."
+  },
+  "aboutPage": {
+    "eyebrow": "About me",
+    "heading": "I shoot and film where something is happening.",
+    "body1": "I'm {name}, {role} based in {region}. I like to work where there's movement — sport, events, people. I go for clear images with energy, and I enjoy filming just as much as shooting stills.",
+    "body2": "My focus is sports photography and videography — the one moment, sharp and in the right light."
+  },
+  "services": {
+    "heading": "Services",
+    "photographyLabel": "Photography",
+    "videoLabel": "Video",
+    "photo": {
+      "sports": ["Sports", "Action, competition and athletes — close to the action."],
+      "events": ["Events", "The mood and moments of a whole event in pictures."],
+      "portraits": ["Athletes / Portraits", "Character in clear light, indoors and out."],
+      "automotive": ["Automotive & Commercial", "Products, cars and brands with pace and precision."]
+    },
+    "video": {
+      "highlights": ["Sports & Highlight Videos", "Dynamic clips that bring the moment back to life."],
+      "events": ["Event Films", "The event as a short, cohesive film."],
+      "social": ["Social / Short-form", "Vertical clips for Instagram, TikTok and YouTube."],
+      "brand": ["Brand / Promo", "Short image films for clubs, brands and companies."]
+    }
+  },
+  "contactPage": {
+    "eyebrow": "Contact",
+    "heading": "Have a project in mind?",
+    "intro": "Game, event or brand — tell me briefly what it's about.",
+    "emailLabel": "Email",
+    "instagramLabel": "Instagram"
+  },
+  "contactForm": {
+    "namePlaceholder": "Name *",
+    "emailPlaceholder": "Email *",
+    "orgPlaceholder": "Team / Organisation",
+    "projectTypeLabel": "Project type …",
+    "projectTypes": {
+      "sport": "Sport",
+      "event": "Event",
+      "automotive": "Automotive",
+      "people": "People",
+      "video": "Video",
+      "other": "Other"
+    },
+    "mediumLabel": "Photo / Video / Both …",
+    "mediumOptions": {
+      "photo": "Photo",
+      "video": "Video",
+      "both": "Both"
+    },
+    "dateLocationPlaceholder": "Date & Location",
+    "messagePlaceholder": "What's it about? *",
+    "errorRequired": "Please fill in name, email and message.",
+    "send": "Send",
+    "sentMessage": "Thanks! Your message is ready — once sending is wired up, it'll go out."
+  },
+  "project": {
+    "client": "Client",
+    "location": "Location",
+    "date": "Date",
+    "sportEvent": "Sport / Event",
+    "nextProject": "Next Project"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Page not found.",
+    "backHome": "Back to homepage"
+  },
+  "localeSwitcher": {
+    "de": "DE",
+    "en": "EN",
+    "label": "Switch language"
+  }
+}

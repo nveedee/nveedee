@@ -1,14 +1,16 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { useRef } from 'react'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import { CATEGORY_LABEL, type Project } from '@/data/projects'
 
 const SPANS = ['md:col-span-8', 'md:col-span-4', 'md:col-span-6', 'md:col-span-6', 'md:col-span-4', 'md:col-span-8']
 const RATIOS = ['aspect-[3/2]', 'aspect-[3/4]', 'aspect-[4/5]', 'aspect-[4/5]', 'aspect-[3/4]', 'aspect-[3/2]']
 
 export function ProjectTile({ project, index = 0 }: { project: Project; index?: number }) {
+  const t = useTranslations('workGrid')
   const videoRef = useRef<HTMLVideoElement>(null)
   const span = SPANS[index % SPANS.length]
   const ratio = RATIOS[index % RATIOS.length]
@@ -55,7 +57,7 @@ export function ProjectTile({ project, index = 0 }: { project: Project; index?: 
           )}
           {isVideo && (
             <span className="absolute left-3 top-3 z-10 text-[10px] font-medium uppercase tracking-[0.18em] text-white mix-blend-difference">
-              Video
+              {t('video')}
             </span>
           )}
         </div>

@@ -1,6 +1,7 @@
 'use client'
 
 import { useMemo, useState } from 'react'
+import { useTranslations } from 'next-intl'
 import { CATEGORY_LABEL, type Category, type MediaType, type Project } from '@/data/projects'
 import { WorkGrid } from './WorkGrid'
 
@@ -8,6 +9,7 @@ type CatFilter = Category | 'alle'
 type MedFilter = MediaType | 'alle'
 
 export function WorkExplorer({ projects }: { projects: Project[] }) {
+  const t = useTranslations('workExplorer')
   const [cat, setCat] = useState<CatFilter>('alle')
   const [med, setMed] = useState<MedFilter>('alle')
 
@@ -32,14 +34,14 @@ export function WorkExplorer({ projects }: { projects: Project[] }) {
         <div className="flex flex-wrap gap-x-5 gap-y-2">
           {cats.map((c) => (
             <FilterButton key={c} active={cat === c} onClick={() => setCat(c)}>
-              {c === 'alle' ? 'Alle' : CATEGORY_LABEL[c]}
+              {c === 'alle' ? t('all') : CATEGORY_LABEL[c]}
             </FilterButton>
           ))}
         </div>
         <div className="flex gap-x-5">
           {(['alle', 'photo', 'video'] as MedFilter[]).map((m) => (
             <FilterButton key={m} active={med === m} onClick={() => setMed(m)}>
-              {m === 'alle' ? 'Alle Medien' : m === 'photo' ? 'Foto' : 'Video'}
+              {m === 'alle' ? t('allMedia') : m === 'photo' ? t('photo') : t('video')}
             </FilterButton>
           ))}
         </div>

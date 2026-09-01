@@ -1,8 +1,9 @@
 'use client'
 
 import Image from 'next/image'
-import Link from 'next/link'
 import { useRef } from 'react'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 import { CATEGORY_LABEL, type Project } from '@/data/projects'
 
 /**
@@ -18,6 +19,7 @@ import { CATEGORY_LABEL, type Project } from '@/data/projects'
  */
 
 export function FeaturedProjectSlot({ project }: { project: Project }) {
+  const t = useTranslations('featuredProject')
   const imageRef = useRef<HTMLImageElement>(null)
 
   return (
@@ -45,7 +47,7 @@ export function FeaturedProjectSlot({ project }: { project: Project }) {
         <div className="flex flex-col justify-center md:col-span-4">
           {/* Kategorie */}
           <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-muted">
-            {CATEGORY_LABEL[project.category].toUpperCase()} • SPORTS PHOTOGRAPHY
+            {CATEGORY_LABEL[project.category].toUpperCase()} • {t('photographySuffix')}
           </p>
 
           {/* Projekt-Titel */}
@@ -71,7 +73,7 @@ export function FeaturedProjectSlot({ project }: { project: Project }) {
             href={`/work/${project.slug}`}
             className="mt-8 inline-block text-[13px] font-medium uppercase tracking-[0.16em] text-ink hover:text-accent transition-colors"
           >
-            View Project →
+            {t('viewProject')}
           </Link>
         </div>
       </div>

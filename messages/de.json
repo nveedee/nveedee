@@ -1,0 +1,130 @@
+{
+  "nav": {
+    "work": "Work",
+    "sport": "Sport",
+    "about": "About",
+    "services": "Services",
+    "contact": "Contact",
+    "menu": "Menü"
+  },
+  "footer": {
+    "impressum": "Impressum",
+    "datenschutz": "Datenschutz",
+    "rights": "© {year} — {role}"
+  },
+  "hero": {
+    "role": "Photographer & Videographer",
+    "tagline": "Foto & Video mit Fokus auf Sport und Bewegung.",
+    "cta": "Work"
+  },
+  "home": {
+    "selectedWorkLabel": "Ausgewählte Arbeiten",
+    "workHeading": "Work",
+    "viewAll": "Alle ansehen →",
+    "sportLabel": "Schwerpunkt",
+    "sportHeading": "Sport",
+    "sportBody": "Sport ist mein Fokus: der eine Moment, den alle anderen verpassen — scharf, nah, im richtigen Licht.",
+    "moreSport": "Mehr Sport →",
+    "aboutLabel": "Über mich",
+    "aboutHeading": "Ich fotografiere und filme, wo Bewegung ist — Sport, Events und Menschen mit Energie.",
+    "aboutMore": "Mehr über mich →",
+    "contactLabel": "Kontakt",
+    "contactHeading": "Ein Projekt in Planung?",
+    "contactCta": "Kontakt aufnehmen"
+  },
+  "featuredProject": {
+    "photographySuffix": "SPORTFOTOGRAFIE",
+    "viewProject": "Projekt ansehen →"
+  },
+  "workGrid": {
+    "empty": "Keine Projekte in dieser Auswahl.",
+    "video": "Video"
+  },
+  "workExplorer": {
+    "all": "Alle",
+    "allMedia": "Alle Medien",
+    "photo": "Foto",
+    "video": "Video"
+  },
+  "workPage": {
+    "eyebrow": "Portfolio",
+    "title": "Work"
+  },
+  "sportPage": {
+    "eyebrow": "Schwerpunkt",
+    "title": "Sport",
+    "intro": "Mein Fokus liegt auf Sport — Action, Wettkampf und die stillen Momente dazwischen."
+  },
+  "aboutPage": {
+    "eyebrow": "Über mich",
+    "heading": "Ich fotografiere und filme, wo etwas passiert.",
+    "body1": "Ich bin {name}, {role} aus {region}. Am liebsten arbeite ich dort, wo Bewegung ist — Sport, Events, Menschen. Ich mag klare Bilder mit Energie und filme genauso gern, wie ich fotografiere.",
+    "body2": "Mein Schwerpunkt wird die Sportfotografie und -videografie — der eine Moment, scharf und im richtigen Licht."
+  },
+  "services": {
+    "heading": "Services",
+    "photographyLabel": "Photography",
+    "videoLabel": "Video",
+    "photo": {
+      "sports": ["Sports", "Action, Wettkampf und Athlet:innen — nah dran am Geschehen."],
+      "events": ["Events", "Stimmung und Momente eines ganzen Anlasses in Bildern."],
+      "portraits": ["Athletes / Portraits", "Charakter in klarem Licht, drinnen wie draussen."],
+      "automotive": ["Automotive & Commercial", "Produkte, Autos und Marken mit Tempo und Präzision."]
+    },
+    "video": {
+      "highlights": ["Sports & Highlight Videos", "Dynamische Clips, die den Moment noch einmal erlebbar machen."],
+      "events": ["Event Films", "Der Anlass als kurzer, stimmiger Film."],
+      "social": ["Social / Short-form", "Vertikale Clips für Instagram, TikTok und YouTube."],
+      "brand": ["Brand / Promo", "Kurze Imagefilme für Vereine, Marken und Unternehmen."]
+    }
+  },
+  "contactPage": {
+    "eyebrow": "Kontakt",
+    "heading": "Ein Projekt in Planung?",
+    "intro": "Ob Spiel, Event oder Marke — schreib mir kurz, worum es geht.",
+    "emailLabel": "E-Mail",
+    "instagramLabel": "Instagram"
+  },
+  "contactForm": {
+    "namePlaceholder": "Name *",
+    "emailPlaceholder": "E-Mail *",
+    "orgPlaceholder": "Team / Organisation",
+    "projectTypeLabel": "Projektart …",
+    "projectTypes": {
+      "sport": "Sport",
+      "event": "Event",
+      "automotive": "Automotive",
+      "people": "People",
+      "video": "Video",
+      "other": "Anderes"
+    },
+    "mediumLabel": "Foto / Video / Beides …",
+    "mediumOptions": {
+      "photo": "Foto",
+      "video": "Video",
+      "both": "Beides"
+    },
+    "dateLocationPlaceholder": "Datum & Ort",
+    "messagePlaceholder": "Worum geht es? *",
+    "errorRequired": "Bitte Name, E-Mail und Nachricht ausfüllen.",
+    "send": "Senden",
+    "sentMessage": "Danke! Deine Nachricht ist bereit — sobald du den Versand angebunden hast, geht sie raus."
+  },
+  "project": {
+    "client": "Client",
+    "location": "Location",
+    "date": "Date",
+    "sportEvent": "Sport / Event",
+    "nextProject": "Nächstes Projekt"
+  },
+  "notFound": {
+    "code": "404",
+    "title": "Seite nicht gefunden.",
+    "backHome": "Zurück zur Startseite"
+  },
+  "localeSwitcher": {
+    "de": "DE",
+    "en": "EN",
+    "label": "Sprache wechseln"
+  }
+}

@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
-import { SITE } from '@/lib/site'
+import { useTranslations } from 'next-intl'
+import { Link } from '@/i18n/navigation'
 
 const DESKTOP_QUERY = '(min-width: 768px)'
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
@@ -17,6 +17,7 @@ const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
  * nicht erst geladen.
  */
 export function Hero() {
+    const t = useTranslations('hero')
     const videoRef = useRef<HTMLVideoElement>(null)
     const [showVideo, setShowVideo] = useState(false)
     const [videoReady, setVideoReady] = useState(false)
@@ -89,12 +90,12 @@ export function Hero() {
             <div className="absolute inset-x-0 bottom-0 z-10 flex items-end justify-between gap-4 px-5 pb-8 text-white sm:px-8 md:pb-11">
                 <div>
                     <p className="text-[12px] font-medium uppercase tracking-[0.22em]">
-                        {SITE.role}
+                        {t('role')}
                     </p>
 
                     {/* Headline = LCP-Element */}
                     <h1 className="mt-2 max-w-3xl font-display text-2xl font-semibold leading-[0.98] tracking-tight sm:text-4xl">
-                        {SITE.tagline}
+                        {t('tagline')}
                     </h1>
                 </div>
 
@@ -102,7 +103,7 @@ export function Hero() {
                     href="/work"
                     className="hidden shrink-0 border border-white/60 px-5 py-2 text-[12px] uppercase tracking-[0.18em] transition-colors hover:bg-white hover:text-ink sm:inline-block"
                 >
-                    Work
+                    {t('cta')}
                 </Link>
             </div>
         </section>

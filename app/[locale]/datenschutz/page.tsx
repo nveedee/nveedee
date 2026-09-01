@@ -1,14 +1,24 @@
 import type { Metadata } from 'next'
+import { setRequestLocale } from 'next-intl/server'
 import { SITE } from '@/lib/site'
 
-export const metadata: Metadata = { title: 'Datenschutz' }
+export const metadata: Metadata = {
+  title: 'Datenschutz',
+  alternates: { canonical: `${SITE.url}/datenschutz` },
+}
 
-export default function DatenschutzPage() {
+export default function DatenschutzPage({ params: { locale } }: { params: { locale: string } }) {
+  setRequestLocale(locale)
   return (
     <section className="mx-auto max-w-2xl px-5 pb-24 pt-32 sm:px-8 md:pt-40">
       <h1 className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">
         Datenschutzerklärung
       </h1>
+      {locale !== 'de' && (
+        <p className="mt-4 text-[13px] text-faint">
+          This privacy policy is only available in German.
+        </p>
+      )}
       <div className="mt-8 space-y-6 text-[15px] text-muted">
          <div>
            <h2 className="font-display text-lg font-medium text-ink">Verantwortlicher</h2>
