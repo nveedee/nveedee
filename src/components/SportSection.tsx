@@ -4,6 +4,10 @@ import { Reveal } from './Reveal'
 import { WorkGrid } from './WorkGrid'
 
 export function SportSection({ projects }: { projects: Project[] }) {
+  if (projects.length === 0) {
+    return null
+  }
+
   return (
     <section id="sport" className="border-t border-line bg-paper2/40">
       <div className="mx-auto max-w-wide px-5 py-24 sm:px-8 md:py-32">
