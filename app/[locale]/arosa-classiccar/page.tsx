@@ -228,8 +228,8 @@ export default function ArosaClassicCarPage({ params: { locale } }: { params: { 
           <p className="text-[13px] uppercase tracking-[0.14em] text-muted">
             Foto: {SITE.fullName} · Arosa ClassicCar 2026
           </p>
-          <Link href="/work" className="text-[14px] text-muted hover:text-ink">
-            ← Zurück zu Work
+          <Link href="/sport" className="text-[14px] text-muted hover:text-ink">
+            ← Zurück zu Sport
           </Link>
         </div>
       </div>

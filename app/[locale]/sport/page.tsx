@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
+import { Link } from '@/i18n/navigation'
 import { WorkGrid } from '@/components/WorkGrid'
 import { getByCategory } from '@/lib/projects'
 
@@ -28,6 +29,22 @@ export default async function SportPage({ params: { locale } }: { params: { loca
         </p>
       </header>
       <WorkGrid projects={projects} />
+
+      <Link
+        href="/arosa-classiccar"
+        className={`group flex items-center justify-between border-t border-line py-8 ${
+          projects.length > 0 ? 'mt-14' : ''
+        }`}
+      >
+        <span>
+          <span className="block text-[11.5px] uppercase tracking-[0.2em] text-muted">
+            Event · 3.–6. September 2026
+          </span>
+          <span className="mt-1 block font-display text-2xl font-semibold tracking-tight group-hover:text-accent sm:text-4xl">
+            Arosa ClassicCar 2026 →
+          </span>
+        </span>
+      </Link>
     </section>
   )
 }
