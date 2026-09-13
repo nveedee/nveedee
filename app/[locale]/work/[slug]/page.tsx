@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
-import { notFound } from 'next/navigation'
+import { notFound, redirect } from 'next/navigation'
 import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { Link } from '@/i18n/navigation'
 import { routing } from '@/i18n/routing'
@@ -10,7 +10,9 @@ import { SITE } from '@/lib/site'
 
 export function generateStaticParams() {
   return routing.locales.flatMap((locale) =>
-    getAllProjects().map((p) => ({ locale, slug: p.slug }))
+    getAllProjects()
+      .filter((p) => !p.href)
+      .map((p) => ({ locale, slug: p.slug }))
   )
 }
 
@@ -37,6 +39,7 @@ export default async function ProjectPage({
   const t = await getTranslations('project')
   const project = getProject(params.slug)
   if (!project) notFound()
+  if (project.href) redirect(project.href)
   const next = getNextProject(project.slug)
 
   const meta = [

@@ -29,7 +29,7 @@ export function ProjectTile({ project, index = 0 }: { project: Project; index?: 
   return (
     <figure className={`col-span-12 ${span}`}>
       <Link
-        href={`/work/${project.slug}`}
+        href={project.href ?? `/work/${project.slug}`}
         onMouseEnter={onEnter}
         onMouseLeave={onLeave}
         className="group block"

@@ -36,6 +36,7 @@ export interface Project {
   credits?: string
   featured: boolean
   isFeaturedProject?: boolean // Special featured project für Homepage-Hero-Slot
+  href?: string // Für Projekte mit eigener dedizierter Seite statt /work/[slug]
 }
 
 export const CATEGORY_LABEL: Record<Category, string> = {
@@ -76,5 +77,20 @@ export const PROJECTS: Project[] = [
     credits: 'Photography & Videography: nveedee.visuals',
     featured: true,
     isFeaturedProject: true,
+  },
+  {
+    slug: 'arosa-classiccar-2026',
+    title: 'Arosa ClassicCar 2026',
+    mediaType: 'photo',
+    category: 'motorsport',
+    cover: '/media/arosa/hero.jpg',
+    date: '3.–6. September 2026',
+    location: 'Langwies → Arosa, Graubünden',
+    description:
+      'Arosa ClassicCar 2026 – 22. Ausgabe des internationalen Bergrennens für historische Sport- und Rennfahrzeuge.',
+    gallery: [],
+    credits: 'Photography: nveedee.visuals',
+    featured: false,
+    href: '/arosa-classiccar',
   },
 ]
