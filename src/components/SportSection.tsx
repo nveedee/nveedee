@@ -7,10 +7,6 @@ import { WorkGrid } from './WorkGrid'
 export function SportSection({ projects }: { projects: Project[] }) {
   const t = useTranslations('home')
 
-  if (projects.length === 0) {
-    return null
-  }
-
   return (
     <section id="sport" className="border-t border-line bg-paper2/40">
       <div className="mx-auto max-w-wide px-5 py-24 sm:px-8 md:py-32">
@@ -25,12 +21,14 @@ export function SportSection({ projects }: { projects: Project[] }) {
             {t('sportBody')}
           </p>
         </Reveal>
-        <WorkGrid projects={projects.slice(0, 3)} />
+        {projects.length > 0 && <WorkGrid projects={projects.slice(0, 3)} />}
 
         <Reveal>
           <Link
             href="/arosa-classiccar"
-            className="group mt-14 flex items-center justify-between border-t border-line py-8"
+            className={`group flex items-center justify-between border-t border-line py-8 ${
+              projects.length > 0 ? 'mt-14' : ''
+            }`}
           >
             <span>
               <span className="block text-[11.5px] uppercase tracking-[0.2em] text-muted">
