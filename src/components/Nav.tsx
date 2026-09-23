@@ -31,18 +31,23 @@ export function Nav() {
           isDark ? 'text-white' : 'text-ink'
         }`}
       >
-        <Link href="/" onClick={close} className="flex items-center py-1" aria-label={SITE.name}>
+        <Link
+          href="/"
+          onClick={close}
+          className="flex shrink-0 items-center py-1"
+          aria-label={SITE.name}
+        >
           <Image
             src={isDark ? '/media/white_logo.png' : '/media/black_logo.png'}
             alt="NVEEDEE"
             width={1536}
             height={1024}
             priority
-            className="h-9 w-auto sm:h-11"
+            className="h-9 w-auto shrink-0 sm:h-11"
           />
         </Link>
 
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden shrink-0 items-center gap-8 md:flex">
           <ul className="flex items-center gap-8">
             {LINKS.map((l) => (
               <li key={l.href}>
@@ -59,14 +64,14 @@ export function Nav() {
           <LocaleSwitcher />
         </div>
 
-        <div className="flex items-center gap-4 md:hidden">
+        <div className="flex shrink-0 items-center gap-4 md:hidden">
           <LocaleSwitcher />
           <button
             type="button"
             aria-label={t('menu')}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
-            className="flex flex-col gap-[5px] p-1.5"
+            className="flex shrink-0 flex-col gap-[5px] p-1.5"
           >
             <span
               className={`h-px w-6 transition-colors duration-500 ease-out ${isDark ? 'bg-white' : 'bg-ink'}`}

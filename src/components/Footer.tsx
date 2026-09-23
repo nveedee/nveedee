@@ -14,7 +14,7 @@ export function Footer() {
           alt={SITE.name}
           width={1536}
           height={1024}
-          className="h-7 w-auto"
+          className="h-7 w-auto shrink-0"
         />
         <div className="flex flex-wrap gap-x-6 gap-y-2 text-[13px] text-muted">
           <a href={SITE.instagram} className="hover:text-ink" target="_blank" rel="noreferrer">
