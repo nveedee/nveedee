@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import { SITE } from '@/lib/site'
@@ -22,8 +23,15 @@ export function Nav() {
   return (
     <header className="fixed inset-x-0 top-0 z-50">
       <nav className="mix-blend-difference text-white mx-auto flex max-w-wide items-center justify-between px-5 py-3 sm:px-8">
-        <Link href="/" onClick={close} className="font-display text-xl font-semibold tracking-tight">
-          {SITE.name}
+        <Link href="/" onClick={close} className="flex items-center py-1" aria-label={SITE.name}>
+          <Image
+            src="/media/white_logo.png"
+            alt="NVEEDEE"
+            width={1536}
+            height={1024}
+            priority
+            className="h-9 w-auto sm:h-11"
+          />
         </Link>
 
         <div className="hidden items-center gap-8 md:flex">
