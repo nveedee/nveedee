@@ -1,0 +1,25 @@
+<svg width="1200" height="360" viewBox="0 0 1200 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="NVEDEE Guestbook preview">
+  <rect width="1200" height="360" fill="#f5f4f1"/>
+  <rect x="1" y="1" width="1198" height="358" fill="none" stroke="#dddad2" stroke-width="1"/>
+
+  <text x="48" y="58" font-family="Helvetica Neue, Arial, sans-serif" font-size="14" font-weight="700" letter-spacing="3" fill="#0e0e0e">GUESTBOOK</text>
+  <line x1="48" y1="72" x2="1152" y2="72" stroke="#dddad2" stroke-width="1"/>
+
+  <!-- entry 1 -->
+  <circle cx="64" cy="118" r="16" fill="#dddad2"/>
+  <text x="94" y="114" font-family="Helvetica Neue, Arial, sans-serif" font-size="16" fill="#0e0e0e">&#8220;Insane portfolio &#128293;&#8221;</text>
+  <text x="94" y="134" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#86837a">@username &#160;&#183;&#160; 23 Sep 2026</text>
+
+  <!-- entry 2 -->
+  <circle cx="64" cy="182" r="16" fill="#dddad2"/>
+  <text x="94" y="178" font-family="Helvetica Neue, Arial, sans-serif" font-size="16" fill="#0e0e0e">&#8220;The mountain run is crazy&#8221;</text>
+  <text x="94" y="198" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#86837a">@username &#160;&#183;&#160; 22 Sep 2026</text>
+
+  <!-- entry 3 -->
+  <circle cx="64" cy="246" r="16" fill="#dddad2"/>
+  <text x="94" y="242" font-family="Helvetica Neue, Arial, sans-serif" font-size="16" fill="#0e0e0e">&#8220;Clean design, love the alpine theme&#8221;</text>
+  <text x="94" y="262" font-family="Helvetica Neue, Arial, sans-serif" font-size="12" fill="#86837a">@username &#160;&#183;&#160; 20 Sep 2026</text>
+
+  <line x1="48" y1="290" x2="1152" y2="290" stroke="#dddad2" stroke-width="1"/>
+  <text x="600" y="326" font-family="Helvetica Neue, Arial, sans-serif" font-size="13" font-weight="600" letter-spacing="2" fill="#e4322b" text-anchor="middle">&#9997;&#160;&#160;SIGN THE GUESTBOOK</text>
+</svg>
