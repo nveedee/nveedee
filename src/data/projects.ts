@@ -35,7 +35,8 @@ export interface Project {
   videos?: string[]
   credits?: string
   featured: boolean
-  isFeaturedProject?: boolean // Special featured project für Homepage-Hero-Slot
+  isFeaturedProject?: boolean // Zeigt das Projekt in der Featured-Work-Sektion auf der Homepage
+  featuredCategory?: string // Optionale Override-Kategoriezeile für die Featured-Work-Karte (sonst CATEGORY_LABEL + Suffix)
   href?: string // Für Projekte mit eigener dedizierter Seite statt /work/[slug]
 }
 
@@ -91,6 +92,8 @@ export const PROJECTS: Project[] = [
     gallery: [],
     credits: 'Photography: nveedee.visuals',
     featured: false,
+    isFeaturedProject: true,
+    featuredCategory: 'AUTOMOTIVE • CLASSIC CARS',
     href: '/arosa-classiccar',
   },
 ]

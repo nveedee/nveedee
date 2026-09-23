@@ -1,83 +1,61 @@
 'use client'
 
 import Image from 'next/image'
-import { useRef } from 'react'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import { CATEGORY_LABEL, type Project } from '@/data/projects'
 
 /**
- * FeaturedProjectSlot — Editorial/Magazine-style Featured Project
- * 
- * Große, hochwertige Darstellung eines Projekts mit:
- * - Großem Hero-Bild mit dezenten Hover-Effekt
- * - Kategorie, Titel, Ort, Beschreibung
- * - Viel Weißraum + clean Design
- * - Responsive auf Mobile/Desktop
- * 
- * System: Mehrere Featured Projects können so nacheinander angezeigt werden.
+ * FeaturedProjectSlot — eine von mehreren gleich gewichteten Featured-Work-Karten
+ *
+ * Großes Bild (einheitliches Seitenverhältnis über alle Slots hinweg) +
+ * Kategorie, Titel, Ort, Datum, Beschreibung, CTA. Bewusst ohne eigene
+ * Hierarchie — die Reihenfolge im Grid entscheidet nicht über Wichtigkeit.
  */
 
 export function FeaturedProjectSlot({ project }: { project: Project }) {
   const t = useTranslations('featuredProject')
-  const imageRef = useRef<HTMLImageElement>(null)
+  const href = project.href ?? `/work/${project.slug}`
+  const category =
+    project.featuredCategory ?? `${CATEGORY_LABEL[project.category].toUpperCase()} • ${t('photographySuffix')}`
 
   return (
-    <section className="mx-auto max-w-wide px-5 py-20 sm:px-8 md:py-32">
-      <div className="grid grid-cols-1 gap-8 md:grid-cols-12 md:gap-12">
-        
-        {/* Bild: 2/3 Breite auf Desktop, Full Width auf Mobile */}
-        <div className="md:col-span-8">
-          <Link href={`/work/${project.slug}`} className="group block overflow-hidden bg-paper2">
-            <div className="relative aspect-[3/2] w-full overflow-hidden">
-              <Image
-                ref={imageRef}
-                src={project.cover}
-                alt={project.title}
-                fill
-                priority
-                sizes="(max-width: 768px) 100vw, (max-width: 1280px) 65vw, 800px"
-                className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
-              />
-            </div>
-          </Link>
+    <article>
+      <Link href={href} className="group block overflow-hidden bg-paper2">
+        <div className="relative aspect-[4/3] w-full overflow-hidden">
+          <Image
+            src={project.cover}
+            alt={project.title}
+            fill
+            sizes="(max-width: 768px) 100vw, 50vw"
+            className="object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+          />
+        </div>
+      </Link>
+
+      <div className="mt-6">
+        <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-muted">{category}</p>
+
+        <Link href={href}>
+          <h3 className="mt-3 font-display text-2xl font-semibold leading-[1.05] tracking-tight text-ink transition-colors hover:text-accent sm:text-3xl">
+            {project.title}
+          </h3>
+        </Link>
+
+        <div className="mt-3">
+          <p className="text-[14px] text-muted">{project.location}</p>
+          <p className="text-[14px] text-muted">{project.date}</p>
         </div>
 
-        {/* Text: 1/3 Breite auf Desktop, Full Width auf Mobile */}
-        <div className="flex flex-col justify-center md:col-span-4">
-          {/* Kategorie */}
-          <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-muted">
-            {CATEGORY_LABEL[project.category].toUpperCase()} • {t('photographySuffix')}
-          </p>
+        <p className="mt-5 max-w-md text-[15px] leading-[1.7] text-muted">{project.description}</p>
 
-          {/* Projekt-Titel */}
-          <Link href={`/work/${project.slug}`}>
-            <h2 className="mt-4 font-display text-3xl font-semibold leading-[1] tracking-tight text-ink hover:text-accent transition-colors sm:text-4xl">
-              {project.title}
-            </h2>
-          </Link>
-
-          {/* Ort & Datum */}
-          <div className="mt-3">
-            <p className="text-[14px] text-muted">{project.location}</p>
-            <p className="text-[14px] text-muted">{project.date}</p>
-          </div>
-
-          {/* Beschreibung */}
-          <p className="mt-6 text-[15px] leading-[1.7] text-muted">
-            {project.description}
-          </p>
-
-          {/* CTA */}
-          <Link
-            href={`/work/${project.slug}`}
-            className="mt-8 inline-block text-[13px] font-medium uppercase tracking-[0.16em] text-ink hover:text-accent transition-colors"
-          >
-            {t('viewProject')}
-          </Link>
-        </div>
+        <Link
+          href={href}
+          className="mt-6 inline-block text-[13px] font-medium uppercase tracking-[0.16em] text-ink transition-colors hover:text-accent"
+        >
+          {t('viewProject')}
+        </Link>
       </div>
-    </section>
+    </article>
   )
 }
-
