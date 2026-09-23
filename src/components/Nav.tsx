@@ -1,16 +1,20 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 import { SITE } from '@/lib/site'
+import { useHeaderTheme } from '@/hooks/useHeaderTheme'
 import { LocaleSwitcher } from './LocaleSwitcher'
 
 export function Nav() {
   const t = useTranslations('nav')
   const [open, setOpen] = useState(false)
   const close = () => setOpen(false)
+  const headerRef = useRef<HTMLElement>(null)
+  const theme = useHeaderTheme(headerRef)
+  const isDark = theme === 'dark'
 
   const LINKS = [
     { href: '/work', label: t('work') },
@@ -21,11 +25,15 @@ export function Nav() {
   ]
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
-      <nav className="mix-blend-difference text-white mx-auto flex max-w-wide items-center justify-between px-5 py-3 sm:px-8">
+    <header ref={headerRef} className="fixed inset-x-0 top-0 z-50">
+      <nav
+        className={`mx-auto flex max-w-wide items-center justify-between px-5 py-3 transition-colors duration-500 ease-out sm:px-8 ${
+          isDark ? 'text-white' : 'text-ink'
+        }`}
+      >
         <Link href="/" onClick={close} className="flex items-center py-1" aria-label={SITE.name}>
           <Image
-            src="/media/white_logo.png"
+            src={isDark ? '/media/white_logo.png' : '/media/black_logo.png'}
             alt="NVEEDEE"
             width={1536}
             height={1024}
@@ -60,8 +68,12 @@ export function Nav() {
             onClick={() => setOpen((v) => !v)}
             className="flex flex-col gap-[5px] p-1.5"
           >
-            <span className="h-px w-6 bg-white" />
-            <span className="h-px w-6 bg-white" />
+            <span
+              className={`h-px w-6 transition-colors duration-500 ease-out ${isDark ? 'bg-white' : 'bg-ink'}`}
+            />
+            <span
+              className={`h-px w-6 transition-colors duration-500 ease-out ${isDark ? 'bg-white' : 'bg-ink'}`}
+            />
           </button>
         </div>
       </nav>

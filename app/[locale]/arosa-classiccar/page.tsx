@@ -82,7 +82,7 @@ export default function ArosaClassicCarPage({ params: { locale } }: { params: { 
       />
 
       {/* 1) HERO */}
-      <section className="relative h-[100svh] min-h-[560px] w-full overflow-hidden bg-paper2">
+      <section data-header-theme="dark" className="relative h-[100svh] min-h-[560px] w-full overflow-hidden bg-paper2">
         <Image
           src="/media/arosa/hero.jpg"
           alt="Historischer Porsche 911 in einer Kurve vor der Porsche-Design-Bande, Arosa ClassicCar 2026"

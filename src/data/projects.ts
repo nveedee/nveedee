@@ -37,6 +37,7 @@ export interface Project {
   featured: boolean
   isFeaturedProject?: boolean // Zeigt das Projekt in der Featured-Work-Sektion auf der Homepage
   featuredCategory?: string // Optionale Override-Kategoriezeile für die Featured-Work-Karte (sonst CATEGORY_LABEL + Suffix)
+  heroTheme?: 'light' | 'dark' // Header-Kontrast über dem Projekt-Hero-Bild auf /work/[slug]; Default 'dark'
   href?: string // Für Projekte mit eigener dedizierter Seite statt /work/[slug]
 }
 
@@ -78,6 +79,7 @@ export const PROJECTS: Project[] = [
     credits: 'Photography & Videography: nveedee.visuals',
     featured: true,
     isFeaturedProject: true,
+    heroTheme: 'light', // Cover ist am oberen Rand hell (Bäume/Himmel) — dunkler Header wäre kaum lesbar
   },
   {
     slug: 'arosa-classiccar-2026',

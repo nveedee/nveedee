@@ -92,7 +92,10 @@ export function Hero() {
     }, [showVideo])
 
     return (
-        <section className="relative h-[100svh] min-h-[560px] w-full overflow-hidden bg-paper2">
+        <section
+            data-header-theme="dark"
+            className="relative h-[100svh] min-h-[560px] w-full overflow-hidden bg-paper2"
+        >
             {/* Poster-Layer: sofort sichtbar, blendet aus sobald das Video bereit ist */}
             <Image
                 src={HERO_VARIANTS[variantId].poster}

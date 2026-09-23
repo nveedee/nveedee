@@ -65,7 +65,10 @@ export default async function ProjectPage({
       />
 
       {/* Hero */}
-      <div className="relative h-[70svh] min-h-[420px] w-full overflow-hidden bg-paper2">
+      <div
+        data-header-theme={project.heroTheme === 'light' ? undefined : 'dark'}
+        className="relative h-[70svh] min-h-[420px] w-full overflow-hidden bg-paper2"
+      >
         <Image
           src={project.cover}
           alt={project.title}
