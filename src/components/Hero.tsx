@@ -1,25 +1,67 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
+const HERO_SESSION_KEY = 'nveedee-hero-video'
+
+type HeroVariantId = 'hero-01' | 'hero-02'
+
+const HERO_VARIANTS: Record<HeroVariantId, { video: string; poster: string }> = {
+    'hero-01': { video: '/media/hero-01-web.mp4', poster: '/media/hero-01-poster.jpg' },
+    'hero-02': { video: '/media/hero-02-web.mp4', poster: '/media/hero-02-poster.png' },
+}
+
+const DEFAULT_VARIANT: HeroVariantId = 'hero-01'
 
 /**
  * Hero: Poster ist sofort sichtbar (next/image, priority). Parallel lädt
- * /media/hero-web.mp4 unsichtbar (opacity 0) im Hintergrund — auf allen
- * Geräten, auch Mobile; sobald es abspielbereit ist, blendet es über das
- * Poster (beide Layer überlappen während der Transition, nie ein leerer
+ * das ausgewählte Hero-Video unsichtbar (opacity 0) im Hintergrund — auf
+ * allen Geräten, auch Mobile; sobald es abspielbereit ist, blendet es über
+ * das Poster (beide Layer überlappen während der Transition, nie ein leerer
  * Zwischenzustand). Nur bei prefers-reduced-motion bleibt es beim Poster —
  * das Video wird dann gar nicht erst geladen.
+ *
+ * Video-Auswahl: Es gibt zwei mögliche Hero-Videos (hero-01 / hero-02).
+ * Pro Session wird genau eines per sessionStorage festgelegt und bleibt für
+ * die gesamte Session bestehen (Reload, Navigation zurück zur Startseite,
+ * Videoende/Loop) — kein Rotieren, kein Crossfade, kein erneutes Würfeln.
+ * Die Auswahl passiert in useLayoutEffect (vor dem ersten Paint), damit der
+ * Server-/Hydration-Render immer mit DEFAULT_VARIANT übereinstimmt und
+ * höchstens ein sessionStorage-Read nötig ist, nie ein sichtbarer Wechsel.
  */
 export function Hero() {
     const t = useTranslations('hero')
     const videoRef = useRef<HTMLVideoElement>(null)
     const [showVideo, setShowVideo] = useState(false)
     const [videoReady, setVideoReady] = useState(false)
+    const [variantId, setVariantId] = useState<HeroVariantId>(DEFAULT_VARIANT)
+
+    useLayoutEffect(() => {
+        let selected: HeroVariantId | null = null
+        try {
+            const stored = window.sessionStorage.getItem(HERO_SESSION_KEY)
+            if (stored === 'hero-01' || stored === 'hero-02') {
+                selected = stored
+            }
+        } catch {
+            // sessionStorage may be unavailable (private mode, blocked storage) — fall back below.
+        }
+
+        if (!selected) {
+            selected = Math.random() < 0.5 ? 'hero-01' : 'hero-02'
+            try {
+                window.sessionStorage.setItem(HERO_SESSION_KEY, selected)
+            } catch {
+                // Selection still works for this render even if it can't persist.
+            }
+        }
+
+        if (selected !== DEFAULT_VARIANT) setVariantId(selected)
+    }, [])
 
     useEffect(() => {
         const reducedMotion = window.matchMedia(REDUCED_MOTION_QUERY)
@@ -53,7 +95,7 @@ export function Hero() {
         <section className="relative h-[100svh] min-h-[560px] w-full overflow-hidden bg-paper2">
             {/* Poster-Layer: sofort sichtbar, blendet aus sobald das Video bereit ist */}
             <Image
-                src="/media/hero-poster.jpg"
+                src={HERO_VARIANTS[variantId].poster}
                 alt=""
                 fill
                 priority
@@ -64,6 +106,7 @@ export function Hero() {
 
             {showVideo && (
                 <video
+                    key={variantId}
                     ref={videoRef}
                     className="absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ease-out"
                     style={{ opacity: videoReady ? 1 : 0 }}
@@ -73,7 +116,7 @@ export function Hero() {
                     playsInline
                     preload="auto"
                 >
-                    <source src="/media/hero-web.mp4" type="video/mp4" />
+                    <source src={HERO_VARIANTS[variantId].video} type="video/mp4" />
                 </video>
             )}
 
