@@ -8,7 +8,7 @@ export function Footer() {
   const year = new Date().getFullYear()
   return (
     <footer className="mt-32 border-t border-line">
-      <div className="mx-auto flex max-w-wide flex-col gap-6 px-5 py-10 sm:px-8 md:flex-row md:items-center md:justify-between">
+      <div className="mx-auto flex max-w-wide flex-col items-start gap-6 px-5 py-10 sm:px-8 md:flex-row md:items-center md:justify-between">
         <Image
           src="/media/black_logo.png"
           alt={SITE.name}
