@@ -6,7 +6,6 @@ import { useTranslations } from 'next-intl'
 import { Link } from '@/i18n/navigation'
 
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
-const HERO_SESSION_KEY = 'nveedee-hero-video'
 
 type HeroVariantId = 'hero-01' | 'hero-02' | 'hero-03'
 
@@ -29,12 +28,10 @@ const DEFAULT_VARIANT: HeroVariantId = 'hero-01'
  * das Video wird dann gar nicht erst geladen.
  *
  * Video-Auswahl: Es gibt mehrere mögliche Hero-Videos (siehe HERO_VARIANTS).
- * Pro Session wird genau eines per sessionStorage festgelegt und bleibt für
- * die gesamte Session bestehen (Reload, Navigation zurück zur Startseite,
- * Videoende/Loop) — kein Rotieren, kein Crossfade, kein erneutes Würfeln.
- * Die Auswahl passiert in useLayoutEffect (vor dem ersten Paint), damit der
- * Server-/Hydration-Render immer mit DEFAULT_VARIANT übereinstimmt und
- * höchstens ein sessionStorage-Read nötig ist, nie ein sichtbarer Wechsel.
+ * Bei jedem Laden der Seite (auch Reload) wird neu zufällig gewählt — kein
+ * Merken zwischen Aufrufen. Die Auswahl passiert in useLayoutEffect (vor dem
+ * ersten Paint), damit der Server-/Hydration-Render mit DEFAULT_VARIANT
+ * übereinstimmt und danach kein sichtbarer Wechsel entsteht.
  */
 export function Hero() {
     const t = useTranslations('hero')
@@ -44,25 +41,7 @@ export function Hero() {
     const [variantId, setVariantId] = useState<HeroVariantId>(DEFAULT_VARIANT)
 
     useLayoutEffect(() => {
-        let selected: HeroVariantId | null = null
-        try {
-            const stored = window.sessionStorage.getItem(HERO_SESSION_KEY)
-            if (stored && (HERO_VARIANT_IDS as string[]).includes(stored)) {
-                selected = stored as HeroVariantId
-            }
-        } catch {
-            // sessionStorage may be unavailable (private mode, blocked storage) — fall back below.
-        }
-
-        if (!selected) {
-            selected = HERO_VARIANT_IDS[Math.floor(Math.random() * HERO_VARIANT_IDS.length)]
-            try {
-                window.sessionStorage.setItem(HERO_SESSION_KEY, selected)
-            } catch {
-                // Selection still works for this render even if it can't persist.
-            }
-        }
-
+        const selected = HERO_VARIANT_IDS[Math.floor(Math.random() * HERO_VARIANT_IDS.length)]
         if (selected !== DEFAULT_VARIANT) setVariantId(selected)
     }, [])
 
