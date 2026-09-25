@@ -8,12 +8,15 @@ import { Link } from '@/i18n/navigation'
 const REDUCED_MOTION_QUERY = '(prefers-reduced-motion: reduce)'
 const HERO_SESSION_KEY = 'nveedee-hero-video'
 
-type HeroVariantId = 'hero-01' | 'hero-02'
+type HeroVariantId = 'hero-01' | 'hero-02' | 'hero-03'
 
 const HERO_VARIANTS: Record<HeroVariantId, { video: string; poster: string }> = {
     'hero-01': { video: '/media/hero-01-web.mp4', poster: '/media/hero-01-poster.jpg' },
     'hero-02': { video: '/media/hero-02-web.mp4', poster: '/media/hero-02-poster.png' },
+    'hero-03': { video: '/media/hero-03-web.mp4', poster: '/media/hero-03-poster.jpg' },
 }
+
+const HERO_VARIANT_IDS = Object.keys(HERO_VARIANTS) as HeroVariantId[]
 
 const DEFAULT_VARIANT: HeroVariantId = 'hero-01'
 
@@ -25,7 +28,7 @@ const DEFAULT_VARIANT: HeroVariantId = 'hero-01'
  * Zwischenzustand). Nur bei prefers-reduced-motion bleibt es beim Poster —
  * das Video wird dann gar nicht erst geladen.
  *
- * Video-Auswahl: Es gibt zwei mögliche Hero-Videos (hero-01 / hero-02).
+ * Video-Auswahl: Es gibt mehrere mögliche Hero-Videos (siehe HERO_VARIANTS).
  * Pro Session wird genau eines per sessionStorage festgelegt und bleibt für
  * die gesamte Session bestehen (Reload, Navigation zurück zur Startseite,
  * Videoende/Loop) — kein Rotieren, kein Crossfade, kein erneutes Würfeln.
@@ -44,15 +47,15 @@ export function Hero() {
         let selected: HeroVariantId | null = null
         try {
             const stored = window.sessionStorage.getItem(HERO_SESSION_KEY)
-            if (stored === 'hero-01' || stored === 'hero-02') {
-                selected = stored
+            if (stored && (HERO_VARIANT_IDS as string[]).includes(stored)) {
+                selected = stored as HeroVariantId
             }
         } catch {
             // sessionStorage may be unavailable (private mode, blocked storage) — fall back below.
         }
 
         if (!selected) {
-            selected = Math.random() < 0.5 ? 'hero-01' : 'hero-02'
+            selected = HERO_VARIANT_IDS[Math.floor(Math.random() * HERO_VARIANT_IDS.length)]
             try {
                 window.sessionStorage.setItem(HERO_SESSION_KEY, selected)
             } catch {

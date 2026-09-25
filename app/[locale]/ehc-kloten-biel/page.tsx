@@ -141,6 +141,21 @@ export default function EhcKlotenBielPage({ params: { locale } }: { params: { lo
 
         {/* 4) STORY GALLERY */}
         <div className="py-16 sm:py-24">
+          {/* Einlauf */}
+          <Reveal>
+            <p className="mb-6 text-[11px] font-medium uppercase tracking-[0.2em] text-muted">
+              Einlauf
+            </p>
+          </Reveal>
+          <Reveal className="grid grid-cols-12 gap-4 sm:gap-6">
+            <GalleryVideo
+              className="col-span-12"
+              src="/media/hero-03-web.mp4"
+              poster="/media/hero-03-poster.jpg"
+              ratio="aspect-[16/9]"
+            />
+          </Reveal>
+
           {/* Warmup */}
           <Reveal>
             <p className="mb-6 text-[11px] font-medium uppercase tracking-[0.2em] text-muted">
@@ -448,6 +463,33 @@ function GalleryImage({
         fill
         sizes="(max-width: 640px) 100vw, 60vw"
         className="object-cover transition-transform duration-[1100ms] ease-[cubic-bezier(0.2,0.7,0.2,1)] group-hover:scale-[1.045]"
+      />
+    </div>
+  )
+}
+
+function GalleryVideo({
+  src,
+  poster,
+  className = '',
+  ratio,
+}: {
+  src: string
+  poster: string
+  className?: string
+  ratio: string
+}) {
+  return (
+    <div className={`relative overflow-hidden bg-paper2 ${ratio} ${className}`}>
+      <video
+        src={src}
+        poster={poster}
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        className="absolute inset-0 h-full w-full object-cover"
       />
     </div>
   )
