@@ -98,4 +98,21 @@ export const PROJECTS: Project[] = [
     featuredCategory: 'AUTOMOTIVE • CLASSIC CARS',
     href: '/arosa-classiccar',
   },
+  {
+    slug: 'ehc-kloten-biel-2026',
+    title: 'EHC Kloten – EHC Biel-Bienne',
+    mediaType: 'photo',
+    category: 'sport',
+    cover: '/media/ehc-kloten-biel/hero.jpg',
+    date: '24. September 2026',
+    location: 'SWISS Arena, Kloten',
+    description:
+      'EHC Kloten – EHC Biel-Bienne, National League, 24. September 2026. Endstand 0–6.',
+    gallery: [],
+    credits: 'Photography: nveedee.visuals',
+    featured: false,
+    isFeaturedProject: true,
+    featuredCategory: 'EISHOCKEY • NATIONAL LEAGUE',
+    href: '/ehc-kloten-biel',
+  },
 ]
